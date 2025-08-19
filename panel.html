@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Panel</title>
+    <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Banner Foto Panel" />
+  </div>
+
+<form id="dataForm">
+  <h2>ORDER PANEL BOT</h2>
+
+<div class="select-container">
+  <select type="text" id="nama" placeholder="PILIH RAM PANEL" required>
+        <option value="1gb">Panel 1GB Rp500</option>
+        <option value="2gb">Panel 2GB Rp1.000</option>
+        <option value="3gb">Panel 3GB Rp1.500</option>
+        <option value="4gb">Panel 4GB Rp2.000</option>
+        <option value="5gb">Panel 5GB Rp2.500</option>
+        <option value="6gb">Panel 6GB Rp3.000</option>
+        <option value="7gb">Panel 7GB Rp3.500</option>
+        <option value="8gb">Panel 8GB Rp4.000</option>
+        <option value="9gb">Panel 9GB Rp4.500</option>
+        <option value="10gb">Panel 10GB Rp5.000</option>
+        <option value="unli">Panel unli Rp6.000</option>
+        <option value="resseller">Resseler Panel Rp7.000 </option>
+        <option value="admin">Admin Panel Rp15.000</option>
+        </select>
+    </div>
+    
+  <input type="text" id="email" placeholder="Nama Panel" required>
+  <input type="tel" id="hp" placeholder="Nomor Wa / Telegram Anda" required>
+  <textarea id="alamat" rows="4" placeholder="Pesan Untuk Admin" required></textarea>
+
+  <button type="submit">Kirim</button>
+
+  <div id="statusMsg"></div>
+  
+  <button id="tombol-lanjut">Payment</button>
+
+
+</form>
+
+<script>
+  const tombol = document.getElementById('tombol-lanjut');
+  tombol.style.display = 'none'; // sembunyikan di awal
+
+  const form = document.getElementById('dataForm');
+  const statusMsg = document.getElementById('statusMsg');
+
+  // GANTI dengan token dan chat_id milikmu
+  const BOT_TOKEN = '8126158606:AAG86-kCiBH6vfWCxFbV2G12jArONxIZwM8';
+  const CHAT_ID = '7609584379';
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById('nama').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const hp = document.getElementById('hp').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
+
+    const message = `
+🏷*Pesana Panel* :
+🤖 Panel: ${nama}
+📝 Nama Panel: ${email}
+📞 Whatsapp  /  Telegram: ${hp}
+📩 Pesan: ${alamat}
+    `;
+
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        statusMsg.textContent = "✅ Pesanan Telah Dikirim Ke Admin. Silahkan Lakukan Pembayaran Dengan Klik Payment!";
+        statusMsg.className = "success";
+
+        form.reset();
+
+        // Tampilkan tombol payment setelah status sukses
+        tombol.style.display = 'inline-block';
+      } else {
+        throw new Error("Gagal mengirim data");
+      }
+    })
+    .catch(err => {
+      statusMsg.textContent = "❌ Terjadi kesalahan saat mengirim.";
+      statusMsg.className = "error";
+
+      // Jika error, sembunyikan tombol payment
+      tombol.style.display = 'none';
+    });
+  });
+
+  // Event klik tombol payment arahkan ke halaman pembayaran (ubah sesuai kebutuhan)
+  tombol.addEventListener('click', function() {
+    window.location.href = 'index.html'; // Ganti URL sesuai tujuan
+  });
+</script>
+</body>
+</html>

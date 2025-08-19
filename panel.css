@@ -1,0 +1,87 @@
+body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0000007a;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Banner */
+    .banner {
+      width: 100%;
+      max-height: 250px;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px white;
+    }
+
+    .banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Form styling */
+    form {
+      max-width: 480px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px white;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input[type=text],
+    input[type=tel],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    button[type=submit],
+    #tombol-lanjut {
+      width: 100%;
+      padding: 12px;
+      background-color: #2196f3;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type=submit]:hover,
+    #tombol-lanjut:hover {
+      background-color: #1976d2;
+    }
+
+    #tombol-lanjut {
+      display: none; /* disembunyikan awal */
+      margin-top: 15px;
+    }
+
+    #statusMsg.success {
+      color: green;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    #statusMsg.error {
+      color: red;
+      margin-top: 10px;
+      font-weight: 600;
+    }
